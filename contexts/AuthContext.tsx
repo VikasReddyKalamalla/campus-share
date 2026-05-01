@@ -8,10 +8,15 @@ import {
   signOut,
   onAuthStateChanged,
   updateProfile,
+  updateEmail,
+  updatePassword,
+  reauthenticateWithCredential,
+  EmailAuthProvider,
   GoogleAuthProvider,
-  signInWithPopup
+  signInWithPopup,
+  deleteUser,
 } from 'firebase/auth';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc, deleteDoc } from 'firebase/firestore';
 import { auth, db } from '@/lib/firebase';
 
 interface AuthContextType {
@@ -23,6 +28,9 @@ interface AuthContextType {
   signInWithGoogle: () => Promise<void>;
   logout: () => Promise<void>;
   updateUserRole: (role: string) => Promise<void>;
+  updateUserProfile: (data: { displayName?: string; phone?: string; bio?: string }) => Promise<void>;
+  changePassword: (currentPassword: string, newPassword: string) => Promise<void>;
+  deleteAccount: (currentPassword: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({} as AuthContextType);
@@ -103,6 +111,37 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const updateUserProfile = async (data: { displayName?: string; phone?: string; bio?: string }) => {
+    if (!user) return;
+    if (data.displayName) {
+      await updateProfile(user, { displayName: data.displayName });
+    }
+    await setDoc(doc(db, 'users', user.uid), {
+      ...(data.displayName && { name: data.displayName }),
+      ...(data.phone !== undefined && { phone: data.phone }),
+      ...(data.bio !== undefined && { bio: data.bio }),
+      updatedAt: new Date().toISOString(),
+    }, { merge: true });
+    // Force re-render with updated user
+    setUser({ ...user } as User);
+  };
+
+  const changePassword = async (currentPassword: string, newPassword: string) => {
+    if (!user || !user.email) throw new Error('No authenticated user');
+    const credential = EmailAuthProvider.credential(user.email, currentPassword);
+    await reauthenticateWithCredential(user, credential);
+    await updatePassword(user, newPassword);
+  };
+
+  const deleteAccount = async (currentPassword: string) => {
+    if (!user || !user.email) throw new Error('No authenticated user');
+    const credential = EmailAuthProvider.credential(user.email, currentPassword);
+    await reauthenticateWithCredential(user, credential);
+    await deleteDoc(doc(db, 'users', user.uid));
+    await deleteUser(user);
+    setUserRole(null);
+  };
+
   const value = {
     user,
     userRole,
@@ -111,12 +150,15 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signIn,
     signInWithGoogle,
     logout,
-    updateUserRole
+    updateUserRole,
+    updateUserProfile,
+    changePassword,
+    deleteAccount,
   };
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 }

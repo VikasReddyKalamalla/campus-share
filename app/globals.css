@@ -155,19 +155,45 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+/* ── Theme CSS variables (set by ThemeContext via JS) ── */
+:root {
+  --theme-bg: #0a0a0f;
+  --theme-surface: #111118;
+  --theme-border: rgba(255,255,255,0.07);
+  --theme-accent: #3b82f6;
+  --theme-accent-hover: #60a5fa;
+  --theme-accent-muted: rgba(59,130,246,0.15);
+  --theme-text: rgba(255,255,255,0.80);
+  --theme-text-muted: rgba(255,255,255,0.40);
+  --theme-text-faint: rgba(255,255,255,0.20);
+  --theme-scrollbar: #3b82f6;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   
   body {
-    @apply bg-background text-foreground;
+    background-color: var(--theme-bg);
+    color: var(--theme-text);
     font-feature-settings: "rlig" 1, "calt" 1;
   }
   
   html {
     scroll-behavior: smooth;
   }
+}
+
+/* Theme-aware scrollbar */
+::-webkit-scrollbar-thumb {
+  background: var(--theme-scrollbar) !important;
+}
+
+/* Theme-aware selection */
+::selection {
+  background-color: var(--theme-accent);
+  color: #fff;
 }
 
 /* Minimal, clean utility classes */
@@ -206,35 +232,35 @@
 
 /* Simple animations */
 .animate-fade-in {
-  animation: fadeIn 0.3s ease-in;
+  animation: fadeIn 0.15s ease-out;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* Clean scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-muted);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-primary);
+  background: var(--theme-scrollbar);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent);
+  opacity: 0.8;
 }
 
 /* Selection */
 ::selection {
-  background-color: var(--color-primary);
-  color: var(--color-primary-foreground);
+  background-color: var(--theme-accent);
+  color: #fff;
 }

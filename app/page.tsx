@@ -2,141 +2,284 @@
 
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Sparkles, GraduationCap, Briefcase, Users, BookOpen } from 'lucide-react'
+import {
+  ArrowRight,
+  GraduationCap,
+  Briefcase,
+  Users,
+  BookOpen,
+  BarChart3,
+  Bell,
+  ChevronRight,
+  CheckCircle2,
+} from 'lucide-react'
+
+const features = [
+  {
+    icon: BookOpen,
+    title: 'Academic Tracking',
+    description:
+      'Monitor courses, grades, attendance, and academic milestones in one unified view.',
+    color: 'text-blue-400',
+    bg: 'bg-blue-500/10',
+    border: 'border-blue-500/20',
+  },
+  {
+    icon: Briefcase,
+    title: 'Placement Portal',
+    description:
+      'Browse opportunities, submit applications, and track every stage of your hiring pipeline.',
+    color: 'text-violet-400',
+    bg: 'bg-violet-500/10',
+    border: 'border-violet-500/20',
+  },
+  {
+    icon: Users,
+    title: 'Campus Network',
+    description:
+      'Build meaningful connections with peers, faculty, and industry professionals.',
+    color: 'text-emerald-400',
+    bg: 'bg-emerald-500/10',
+    border: 'border-emerald-500/20',
+  },
+  {
+    icon: BarChart3,
+    title: 'Analytics & Reports',
+    description:
+      'Institutional dashboards with real-time data on placements, performance, and engagement.',
+    color: 'text-amber-400',
+    bg: 'bg-amber-500/10',
+    border: 'border-amber-500/20',
+  },
+  {
+    icon: Bell,
+    title: 'Announcements',
+    description:
+      'Stay informed with targeted notifications for events, deadlines, and campus updates.',
+    color: 'text-rose-400',
+    bg: 'bg-rose-500/10',
+    border: 'border-rose-500/20',
+  },
+  {
+    icon: GraduationCap,
+    title: 'Resource Library',
+    description:
+      'Access lecture notes, study materials, and curated resources organised by subject.',
+    color: 'text-cyan-400',
+    bg: 'bg-cyan-500/10',
+    border: 'border-cyan-500/20',
+  },
+]
+
+const stats = [
+  { value: '10,000+', label: 'Active Students' },
+  { value: '500+', label: 'Hiring Partners' },
+  { value: '95%', label: 'Placement Rate' },
+  { value: '1,200+', label: 'Study Resources' },
+]
+
+const highlights = [
+  'Role-based dashboards for students, faculty, and admins',
+  'End-to-end placement workflow management',
+  'Real-time collaboration and messaging',
+  'Secure, institution-grade data handling',
+]
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-950 dark:via-teal-950 dark:to-cyan-950"></div>
-      <div className="absolute inset-0 leaf-pattern opacity-30"></div>
-      
-      {/* Floating Elements */}
-      <div className="absolute top-20 left-10 w-96 h-96 bg-emerald-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
-      <div className="absolute top-40 right-10 w-96 h-96 bg-teal-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
-      <div className="absolute -bottom-8 left-20 w-96 h-96 bg-cyan-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+    <div className="min-h-screen bg-[#0a0a0f] text-white selection:bg-blue-500/30">
+      {/* Subtle grid background */}
+      <div
+        className="pointer-events-none fixed inset-0 z-0"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
+          backgroundSize: '64px 64px',
+        }}
+      />
+      {/* Radial glow — top center */}
+      <div className="pointer-events-none fixed inset-0 z-0 flex justify-center">
+        <div className="h-[600px] w-[900px] rounded-full bg-blue-600/10 blur-[120px] -translate-y-1/3" />
+      </div>
 
       <div className="relative z-10">
-        {/* Hero Section */}
-        <div className="container mx-auto px-4 py-20">
-          <div className="text-center space-y-8 animate-fade-in">
-            {/* Logo */}
-            <div className="flex justify-center mb-8">
-              <div className="relative">
-                <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500 flex items-center justify-center shadow-2xl shadow-emerald-500/50 transform hover:scale-110 transition-transform duration-300">
-                  <GraduationCap className="h-12 w-12 text-white" />
-                </div>
-                <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-3xl blur opacity-30"></div>
+        {/* ── Navbar ── */}
+        <header className="border-b border-white/[0.06] backdrop-blur-sm bg-[#0a0a0f]/80 sticky top-0 z-50">
+          <div className="container mx-auto px-6 h-16 flex items-center justify-between max-w-6xl">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center">
+                <GraduationCap className="h-4.5 w-4.5 text-white" />
               </div>
+              <span className="font-semibold text-[15px] tracking-tight">Campus Hub</span>
             </div>
 
-            {/* Heading */}
-            <div className="space-y-4">
-              <h1 className="text-6xl md:text-7xl font-bold bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 bg-clip-text text-transparent">
-                Campus Hub
-              </h1>
-              <p className="text-2xl md:text-3xl text-muted-foreground max-w-3xl mx-auto">
-                Your all-in-one platform for academics, placements, and campus life
-              </p>
-            </div>
+            <nav className="hidden md:flex items-center gap-7 text-sm text-white/50">
+              <a href="#features" className="hover:text-white transition-colors">Features</a>
+              <a href="#stats" className="hover:text-white transition-colors">About</a>
+            </nav>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
-              <Link href="/register">
-                <Button 
-                  size="lg"
-                  className="h-14 px-8 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-600 hover:via-teal-600 hover:to-cyan-600 text-white font-semibold shadow-lg shadow-emerald-500/50 transform hover:scale-105 transition-all duration-200 text-lg"
-                >
-                  Get Started
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
+            <div className="flex items-center gap-3">
               <Link href="/login">
-                <Button 
-                  size="lg"
-                  variant="outline"
-                  className="h-14 px-8 rounded-xl border-2 border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-950 text-lg font-semibold transform hover:scale-105 transition-all duration-200"
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-white/60 hover:text-white hover:bg-white/5 text-sm"
                 >
                   Sign In
                 </Button>
               </Link>
+              <Link href="/register">
+                <Button
+                  size="sm"
+                  className="bg-blue-600 hover:bg-blue-500 text-white text-sm px-4 h-8 rounded-md font-medium transition-colors"
+                >
+                  Get Started
+                </Button>
+              </Link>
             </div>
           </div>
+        </header>
 
-          {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-20">
-            <div className="glass backdrop-blur-xl bg-white/70 dark:bg-gray-900/70 p-8 rounded-2xl border border-white/20 shadow-xl hover:scale-105 transition-transform duration-300">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center mb-4 shadow-lg">
-                <BookOpen className="h-7 w-7 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Academics</h3>
-              <p className="text-muted-foreground">Track your courses, grades, and academic progress</p>
-            </div>
-
-            <div className="glass backdrop-blur-xl bg-white/70 dark:bg-gray-900/70 p-8 rounded-2xl border border-white/20 shadow-xl hover:scale-105 transition-transform duration-300">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center mb-4 shadow-lg">
-                <Briefcase className="h-7 w-7 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Placements</h3>
-              <p className="text-muted-foreground">Find jobs, apply, and track your applications</p>
-            </div>
-
-            <div className="glass backdrop-blur-xl bg-white/70 dark:bg-gray-900/70 p-8 rounded-2xl border border-white/20 shadow-xl hover:scale-105 transition-transform duration-300">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center mb-4 shadow-lg">
-                <Users className="h-7 w-7 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Collaborate</h3>
-              <p className="text-muted-foreground">Connect with students and faculty</p>
-            </div>
-
-            <div className="glass backdrop-blur-xl bg-white/70 dark:bg-gray-900/70 p-8 rounded-2xl border border-white/20 shadow-xl hover:scale-105 transition-transform duration-300">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center mb-4 shadow-lg">
-                <Sparkles className="h-7 w-7 text-white" />
-              </div>
-              <h3 className="text-xl font-bold mb-2">Resources</h3>
-              <p className="text-muted-foreground">Access course materials and study resources</p>
-            </div>
+        {/* ── Hero ── */}
+        <section className="container mx-auto px-6 pt-28 pb-24 max-w-6xl text-center">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3.5 py-1.5 text-xs text-white/60 mb-8">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            Trusted by 10,000+ students across institutions
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20">
-            <div className="text-center">
-              <div className="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">10K+</div>
-              <div className="text-muted-foreground mt-2">Students</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold bg-gradient-to-r from-teal-600 to-cyan-600 bg-clip-text text-transparent">500+</div>
-              <div className="text-muted-foreground mt-2">Companies</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">95%</div>
-              <div className="text-muted-foreground mt-2">Placement Rate</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">1000+</div>
-              <div className="text-muted-foreground mt-2">Resources</div>
+          <h1 className="text-5xl md:text-[68px] font-bold tracking-tight leading-[1.08] mb-6">
+            The campus platform
+            <br />
+            <span className="text-white/30">built for outcomes.</span>
+          </h1>
+
+          <p className="text-lg text-white/45 max-w-xl mx-auto leading-relaxed mb-10">
+            Campus Hub unifies academics, placements, collaboration, and
+            institutional analytics into a single, cohesive workspace.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+            <Link href="/register">
+              <Button className="h-11 px-6 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-lg text-sm transition-colors flex items-center gap-2">
+                Start for free
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+            <Link href="/login">
+              <Button
+                variant="outline"
+                className="h-11 px-6 border-white/10 bg-white/5 hover:bg-white/10 text-white/70 hover:text-white font-medium rounded-lg text-sm transition-colors"
+              >
+                Sign in to your account
+              </Button>
+            </Link>
+          </div>
+
+          {/* Highlights */}
+          <div className="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-2">
+            {highlights.map((h) => (
+              <span key={h} className="flex items-center gap-1.5 text-xs text-white/35">
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500/70" />
+                {h}
+              </span>
+            ))}
+          </div>
+        </section>
+
+        {/* ── Stats ── */}
+        <section id="stats" className="border-y border-white/[0.06] bg-white/[0.02]">
+          <div className="container mx-auto px-6 py-14 max-w-6xl">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {stats.map((s) => (
+                <div key={s.label} className="text-center">
+                  <div className="text-3xl font-bold text-white tracking-tight">{s.value}</div>
+                  <div className="text-sm text-white/35 mt-1">{s.label}</div>
+                </div>
+              ))}
             </div>
           </div>
-        </div>
+        </section>
+
+        {/* ── Features ── */}
+        <section id="features" className="container mx-auto px-6 py-24 max-w-6xl">
+          <div className="mb-14">
+            <p className="text-xs font-semibold uppercase tracking-widest text-blue-400/70 mb-3">
+              Platform capabilities
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white">
+              Everything your campus needs,
+              <br />
+              <span className="text-white/30">in one place.</span>
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {features.map((f) => {
+              const Icon = f.icon
+              return (
+                <div
+                  key={f.title}
+                  className={`group relative rounded-xl border ${f.border} bg-white/[0.03] p-6 hover:bg-white/[0.05] transition-colors duration-200`}
+                >
+                  <div className={`w-10 h-10 rounded-lg ${f.bg} flex items-center justify-center mb-4`}>
+                    <Icon className={`h-5 w-5 ${f.color}`} />
+                  </div>
+                  <h3 className="font-semibold text-white text-[15px] mb-1.5">{f.title}</h3>
+                  <p className="text-sm text-white/40 leading-relaxed">{f.description}</p>
+                  <div className="mt-4 flex items-center gap-1 text-xs text-white/25 group-hover:text-white/50 transition-colors">
+                    Learn more <ChevronRight className="h-3 w-3" />
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </section>
+
+        {/* ── CTA Banner ── */}
+        <section className="container mx-auto px-6 pb-24 max-w-6xl">
+          <div className="relative rounded-2xl border border-white/[0.08] bg-gradient-to-br from-blue-600/15 via-transparent to-violet-600/10 p-12 text-center overflow-hidden">
+            {/* inner glow */}
+            <div className="pointer-events-none absolute inset-0 flex justify-center items-end">
+              <div className="h-48 w-96 rounded-full bg-blue-500/10 blur-3xl" />
+            </div>
+            <div className="relative z-10">
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+                Ready to transform your campus experience?
+              </h2>
+              <p className="text-white/40 text-base mb-8 max-w-md mx-auto">
+                Join thousands of students and institutions already using Campus Hub.
+              </p>
+              <Link href="/register">
+                <Button className="h-11 px-8 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-lg text-sm transition-colors inline-flex items-center gap-2">
+                  Create your account
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Footer ── */}
+        <footer className="border-t border-white/[0.06] py-8">
+          <div className="container mx-auto px-6 max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-2 text-white/30 text-sm">
+              <div className="w-5 h-5 rounded bg-blue-600/60 flex items-center justify-center">
+                <GraduationCap className="h-3 w-3 text-white" />
+              </div>
+              Campus Hub
+            </div>
+            <p className="text-xs text-white/20">
+              © {new Date().getFullYear()} Campus Hub. All rights reserved.
+            </p>
+            <div className="flex gap-5 text-xs text-white/25">
+              <a href="#" className="hover:text-white/50 transition-colors">Privacy</a>
+              <a href="#" className="hover:text-white/50 transition-colors">Terms</a>
+              <a href="#" className="hover:text-white/50 transition-colors">Contact</a>
+            </div>
+          </div>
+        </footer>
       </div>
-
-      <style jsx>{`
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-        .animation-delay-4000 {
-          animation-delay: 4s;
-        }
-      `}</style>
     </div>
   )
 }

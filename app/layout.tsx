@@ -73,7 +73,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
+    <html lang="en" className="dark" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
         {/* Apply theme before first paint — prevents flash */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />

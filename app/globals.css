@@ -181,7 +181,7 @@
   }
   
   html {
-    scroll-behavior: smooth;
+    /* scroll-behavior managed via data-scroll-behavior="smooth" on <html> */
   }
 }
 
